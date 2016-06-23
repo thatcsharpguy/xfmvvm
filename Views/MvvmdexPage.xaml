@@ -1,4 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Mvvmdex" x:Class="Mvvmdex.MvvmdexPage">
-	<Label Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Center" />
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Mvvmdex.Views.MvvmdexPage"
+             Title="Mvvmdex">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    
+    <SearchBar Grid.Row="0" />
+
+
+    <StackLayout Grid.Row="1" Padding="20" Spacing="10">
+      <Label Text="Place holder" FontSize="Large" />
+      <Label Text="Place holder"  />
+      <Label Text="Shape"  />
+    </StackLayout>
+
+    <Label Text="😕" Grid.Row="1" HorizontalTextAlignment="Center" FontSize="100" />
+
+
+  </Grid>
 </ContentPage>

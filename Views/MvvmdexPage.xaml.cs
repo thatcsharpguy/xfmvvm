@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Mvvmdex
+namespace Mvvmdex.Views
 {
 	public partial class MvvmdexPage : ContentPage
 	{
