@@ -6,18 +6,83 @@ using Mvvmdex.Models;
 
 namespace Mvvmdex.ViewModels
 {
-	public class PokemonSearchViewModel : INotifyPropertyChanged
-	{
+    public class PokemonSearchViewModel : INotifyPropertyChanged
+    {
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-	    public void RaiseOnPropertyChange([CallerMemberName] string propertyName = null)
-	    {
-	        if (PropertyChanged != null)
-	        {
-	            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-	        }
-	    }
-	}
+        public void RaiseOnPropertyChange([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private MvvmdexClient _client;
+
+        public PokemonSearchViewModel()
+        {
+            _client = new MvvmdexClient();
+        }
+
+        private string _pokemonName;
+
+        public string PokemonName
+        {
+            get { return _pokemonName; }
+            set { _pokemonName = value; RaiseOnPropertyChange(); }
+        }
+
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set{ _description = value; RaiseOnPropertyChange(); }
+        }
+
+        private string _shape;
+
+        public string Shape
+        {
+            get { return _shape; }
+            set { _shape = value; RaiseOnPropertyChange(); }
+        }
+
+        private bool _hasCoincidence;
+
+        public bool HasCoincidence
+        {
+            get { return _hasCoincidence; }
+            set { _hasCoincidence = value; RaiseOnPropertyChange(); }
+        }
+
+
+        private ICommand _buscaPokemonCommand;
+        public ICommand BuscaPokemonCommand
+        {
+            get
+            {
+                if (_buscaPokemonCommand == null)
+                {
+                    Action<string> buscaPokemonAction = async (pokemonName) =>
+                    {
+                        var pokemon = await _client.SearchForPokemon(pokemonName);
+
+                        HasCoincidence = pokemon != null;
+                        if (HasCoincidence)
+                        {
+                            Description = pokemon.Description;
+                            PokemonName = String.Format("{0:D3} {1}", pokemon.Id, pokemon.Name);
+                            Shape = pokemon.Shape;
+                        }
+                    };
+                    _buscaPokemonCommand = new BuscaPokemonCommand(buscaPokemonAction);
+                }
+                return _buscaPokemonCommand;
+            }
+        }
+    }
 }
 
