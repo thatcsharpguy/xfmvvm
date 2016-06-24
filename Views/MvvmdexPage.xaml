@@ -9,7 +9,8 @@
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
     
-    <SearchBar Grid.Row="0"  />
+    <SearchBar Grid.Row="0" SearchCommand="{Binding BuscaPokemonCommand}"
+			SearchCommandParameter="{Self Text}"/>
 
 
     <StackLayout IsVisible="{Binding HasCoincidence}" Grid.Row="1" Padding="20" Spacing="10">
