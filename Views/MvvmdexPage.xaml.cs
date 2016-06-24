@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Mvvmdex.ViewModels;
+using Xamarin.Forms;
 
 namespace Mvvmdex.Views
 {
@@ -6,6 +7,7 @@ namespace Mvvmdex.Views
 	{
 		public MvvmdexPage()
 		{
+		    BindingContext = new PokemonSearchViewModel();
 			InitializeComponent();
 		}
 	}
