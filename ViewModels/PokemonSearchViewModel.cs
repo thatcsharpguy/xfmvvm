@@ -42,6 +42,8 @@ namespace Mvvmdex.ViewModels
             set{ _description = value; RaiseOnPropertyChange(); }
         }
 
+		public string SearchTerms { get; set; }
+
         private string _shape;
 
         public string Shape
@@ -58,7 +60,6 @@ namespace Mvvmdex.ViewModels
             set { _hasCoincidence = value; RaiseOnPropertyChange(); }
         }
 
-
         private ICommand _buscaPokemonCommand;
         public ICommand BuscaPokemonCommand
         {
@@ -66,9 +67,9 @@ namespace Mvvmdex.ViewModels
             {
                 if (_buscaPokemonCommand == null)
                 {
-                    Action<string> buscaPokemonAction = async (pokemonName) =>
-                    {
-                        var pokemon = await _client.SearchForPokemon(pokemonName);
+					Action buscaPokemonAction = async () =>
+					{
+					var pokemon = await _client.SearchForPokemon(SearchTerms.ToLower());
 
                         HasCoincidence = pokemon != null;
                         if (HasCoincidence)

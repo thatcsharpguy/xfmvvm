@@ -9,28 +9,20 @@ namespace Mvvmdex.ViewModels
 {
     public class BuscaPokemonCommand : ICommand
     {
-        private readonly Action<string> _search;
-        public BuscaPokemonCommand(Action<string> search)
+        private readonly Action _search;
+        public BuscaPokemonCommand(Action search)
         {
             _search = search;
         }
 
         public bool CanExecute(object parameter)
         {
-            if (parameter != null)
-            {
-                var pokemon = (string) parameter;
-                return !String.IsNullOrEmpty(pokemon);
-            }
-            return false;
+			return true;
         }
 
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter))
-            {
-                _search(parameter as string);
-            }
+                _search();
         }
 
         public event EventHandler CanExecuteChanged;
