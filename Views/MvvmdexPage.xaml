@@ -1,25 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="Mvvmdex.Views.MvvmdexPage"
-             Title="Mvvmdex">
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    
-    <SearchBar Grid.Row="0"  />
-
-
-    <StackLayout IsVisible="{Binding HasCoincidence}" Grid.Row="1" Padding="20" Spacing="10">
-      <Label Text="{Binding PokemonName}" FontSize="Large" />
-      <Label Text="{Binding Desription}"  />
-      <Label Text="{Binding Shape}"  />
-    </StackLayout>
-
-    <Label IsVisible="False" Text="😕" Grid.Row="1" HorizontalTextAlignment="Center" FontSize="100" />
-
-
-  </Grid>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:converters="clr-namespace:Mvvmdex.Views.Converters" 
+		x:Class="Mvvmdex.Views.MvvmdexPage" 
+		Title="Mvvmdex">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<converters:BooleanInverterConverter x:Key="BooleanInverter" />
+			<converters:ShapeToEmojiConverter x:Key="ShapeToEmoji" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<SearchBar Grid.Row="0" SearchCommand="{Binding BuscaPokemonCommand}" 
+			Text="{Binding SearchTerms}" />
+		
+		<StackLayout IsVisible="{Binding HasCoincidence}" Grid.Row="1" Padding="20" Spacing="10">
+			<Label Text="{Binding PokemonName}" FontSize="Large" />
+			<Label Text="{Binding Description}" />
+			<Label Text="{Binding Shape, Converter={StaticResource ShapeToEmoji}}" />
+		</StackLayout>
+		
+		<Label IsVisible="{Binding HasCoincidence, Converter={StaticResource BooleanInverter}}" 
+			Text="😕" Grid.Row="1" HorizontalTextAlignment="Center" FontSize="100" />
+	</Grid>
 </ContentPage>

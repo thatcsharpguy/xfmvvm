@@ -116,6 +116,10 @@
       <Project>{9CA4554B-0D0E-4315-B959-E758CA465626}</Project>
       <Name>Mvvmdex.Views</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModels\Mvvmdex.ViewModels.csproj">
+      <Project>{A29BD546-D168-4AC9-8354-D2841C070044}</Project>
+      <Name>Mvvmdex.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
