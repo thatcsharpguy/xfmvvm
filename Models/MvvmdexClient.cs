@@ -25,12 +25,12 @@ namespace Mvvmdex.Models
 					Id = pkmn.Id,
 					Name = pkmn.Name,
 					Description = species.FlavorTextEntries
-					                     .FirstOrDefault(te => te.Language.Name == "en")?
+					                     .FirstOrDefault(te => te.Language.Name == "en")
 					                     .FlavorText.Replace("\n",""),
 					Shape = species.Shape.Name
 				};
 			}
-			catch
+			catch(System.Exception e)
 			{
 				return null;
 			}
